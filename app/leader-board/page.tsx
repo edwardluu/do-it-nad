@@ -63,7 +63,6 @@ async function LeaderBoardPage() {
             {leaderBoard &&
               leaderBoard.map((user, index) => {
                 return (
-                  // eslint-disable-next-line react/jsx-key
                   <TableRow key={index}>
                     <TableCell className="text-xl">{renderIcon(index)}</TableCell>
                     <TableCell className="font-medium text-xl text-green-600">{index + 1}</TableCell>

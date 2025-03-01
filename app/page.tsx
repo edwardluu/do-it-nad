@@ -12,7 +12,7 @@ import {
 } from "wagmi";
 import { ConnectKitButton } from "connectkit";
 import Link from "next/link";
-import { abi } from "@/lib/abi";
+import { abi, addressContract } from "@/lib/abi";
 import { getUser, updatePoint } from "@/lib/supabase/services";
 
 const choices = ["rock", "paper", "scissors"];
@@ -72,7 +72,7 @@ export default function Home() {
     setComputerChoice(computer);
 
     writeContract({
-      address: "0x3BA54095052346b34704c112634ed3492CBB6275",
+      address: addressContract,
       abi,
       functionName: "sayGMonad",
     });
@@ -86,7 +86,17 @@ export default function Home() {
     }
     if (isConfirmed) {
       setOpenDialogMessages(false);
-      playGameAction();
+      // @ts-expect-error: Unreachable code error
+      const { point, status, message } = determineWinner(
+        userChoice,
+        computerChoice
+      );
+      const currentPoint = userPoint + point;
+
+      updatePoint(address || "", point);
+      setData({ point, status, message });
+      setPoint(currentPoint);
+      setOpenDialogStatus(true);
     }
   }, [isConfirmed, error]);
 
@@ -104,15 +114,6 @@ export default function Home() {
     setComputerChoice("");
     setOpenDialogStatus(false);
     setDisabled(false);
-  };
-
-  const playGameAction = () => {
-    const data = determineWinner(userChoice, computerChoice);
-    const point = userPoint + data?.point;
-    updatePoint(address, point);
-    setData(data);
-    setPoint(point);
-    setOpenDialogStatus(true);
   };
 
   return (
@@ -150,14 +151,14 @@ export default function Home() {
         {!address ? (
           <ConnectKitButton theme="retro" />
         ) : (
-            <ButtonApp
-              onClick={play}
-              className={`text-5xl rounded p-12`}
-              disabled={!userChoice || disabled}
-              typeButton="play"
-            >
-              <span>Play</span>
-            </ButtonApp>
+          <ButtonApp
+            onClick={play}
+            className={`text-5xl rounded p-12`}
+            disabled={!userChoice || disabled}
+            typeButton="play"
+          >
+            <span>Play</span>
+          </ButtonApp>
         )}
       </div>
       <div className="flex w-full justify-center">

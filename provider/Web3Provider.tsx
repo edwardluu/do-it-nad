@@ -1,3 +1,4 @@
+
 "use client";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { monadTestnet } from "wagmi/chains";
@@ -14,7 +15,7 @@ const config = createConfig(
     },
 
     // Required API Keys
-    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
+    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '',
 
     // Required App Info
     appName: "DoitNad",
@@ -23,13 +24,12 @@ const config = createConfig(
     appDescription: "Do it Nad",
     appUrl: "", // your app's url
     appIcon: "", // your app's icon, no bigger than 1024x1024px (max. 1MB)
-
-    hideBalance: false,
   })
 );
 
 const queryClient = new QueryClient();
 
+// @ts-expect-error: Unreachable code error
 export const Web3Provider = ({ children }) => {
   return (
     <WagmiProvider config={config}>

@@ -1,5 +1,4 @@
 import { createClient } from "./client";
-import { createClient as createClientServer } from "./server";
 
 export const getLeaderBoard = async () => {
   // fetch users from Users table
