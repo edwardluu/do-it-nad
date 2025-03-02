@@ -8,7 +8,7 @@ function Header() {
   return (
     <header className="w-full container h-16 border-2 flex justify-around items-center mt-4 px-6 rounded-4xl border-[#b18597]">
       <Link href="/" className="w-full h-full flex items-center">
-        <Image src="/logo.gif" alt="logo" width={52} height={52} />
+        <Image src="/logo.gif" alt="logo" unoptimized width={52} height={52} />
       </Link>
       <Link
         href="/leader-board"

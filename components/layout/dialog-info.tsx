@@ -69,6 +69,7 @@ function DialogStatus({ data, open, resetGame }: DialogStatusProps) {
         onInteractOutside={(e) => {
           e.preventDefault();
         }}
+        className="[&>button]:hidden"
       >
         <DialogTitle></DialogTitle>
         <DialogHeader className="flex items-center justify-center">

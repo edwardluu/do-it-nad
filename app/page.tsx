@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import DialogStatus from "@/components/layout/dialog-info";
 import DialogMessages from "@/components/layout/dialog-message";
@@ -91,20 +92,25 @@ export default function Home() {
         userChoice,
         computerChoice
       );
-      const currentPoint = userPoint + point;
 
-      updatePoint(address || "", point);
+      if (point) {
+        const currentPoint = userPoint + point;
+        // @ts-expect-error: Unreachable code error
+        updatePoint(address, currentPoint);
+        setPoint(currentPoint);
+      }
       setData({ point, status, message });
-      setPoint(currentPoint);
       setOpenDialogStatus(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConfirmed, error]);
 
   useEffect(() => {
     if (!address) return;
     async function getUserData() {
       const data = await getUser(address || "");
-      if (data) setPoint(data.point);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      if (data) setPoint(data.point || 0);
     }
     getUserData();
   }, [address]);
@@ -132,7 +138,8 @@ export default function Home() {
             />
           </Link>
           <div className="md:text-4xl text-xl font-bold text-slate-500">
-            Your Points: <span className="text-yellow-400">{userPoint}</span>
+            Your Points:
+            <span className="text-yellow-400">{userPoint || 0}</span>
           </div>
         </div>
         {computerChoice ? (
