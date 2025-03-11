@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik_Distressed } from "next/font/google";
+import { Analytics } from '@vercel/analytics/next';
 import { Web3Provider } from "@/provider/Web3Provider";
 import Header from "@/components/layout/header-app";
 import "./globals.css";
@@ -34,6 +35,7 @@ export default function RootLayout({
             <Header />
             <div className="h-[calc(100vh-80px)]  w-full flex flex-col container py-10">
               {children}
+              <Analytics />
             </div>
           </div>
         </body>

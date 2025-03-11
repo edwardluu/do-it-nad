@@ -137,9 +137,9 @@ export default function Home() {
               alt="rank"
             />
           </Link>
-          <div className="md:text-4xl text-xl font-bold text-slate-500">
+          <div className="md:text-4xl text-2xl font-bold text-slate-500">
             Your Points:
-            <span className="text-yellow-400 pl-1">{userPoint || 0}</span>
+            <span className="text-yellow-400 lg:pl-3 pl-2">{userPoint || 0}</span>
           </div>
         </div>
         {computerChoice ? (
