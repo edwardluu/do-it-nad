@@ -43,7 +43,7 @@ export default function RootLayout({
             <div className="w-full overflow-hidden whitespace-nowrap">
               <p className="inline-block text-pink-500 text-2xl mt-1 animate-[marquee_10s_linear_infinite]">
                 DoItNad will officially shut down after{" "}
-                {calculateDaysFromToday()} days, 🏆 TOP 10 will receive 50 MON
+                {calculateDaysFromToday()} days, 🏆 TOP 10 will receive 50 MON TESTNET
                 as a special prize.
               </p>
             </div>
