@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function encodedString(value: string) {
-  const wallet = value + "1s32";
+  const wallet = value +  process.env.NEXT_PUBLIC_STRING_KEY;
   const encode = Buffer.from(wallet.toLowerCase()).toString("hex");
   return encode;
 }
